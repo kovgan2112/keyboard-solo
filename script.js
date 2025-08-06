@@ -5,16 +5,35 @@ const wrongCounterElement = document.querySelector('.wrong-count');
 const wordMistakesElement = document.querySelector('.word-mistakes');
 const spans = wordContainer.querySelectorAll('span');
 
+
 function getRandomWord() {
     return words[Math.floor(Math.random() * words.length)];
 }
 
 function loadNewWord() {
+    const word = getRandomWord();
+
+    for (let letter of word) {
+        const span = document.createElement("span");
+        PannerNode.textContent = letter;
+        wordContainer.appendChild(span);
+    }
 
 }
 
+let currentIndex = 0;
+
 document.addEventListener('keydown', (event) => {
-            if ( //если пользователь нажал правильную букву добавляется класс .с, spans.classList.add('c')
-                //в ином случаи else{spans.classList.add('w')} )
-            });
-        //выводится новое слово, вызов функции  loadNewWord();
+    if (currentIndex >= spans.length) return;
+    const pressedKey = event.key.toLowerCase();
+    const expectedChar = spans[currentIndex].textContent.toLowerCase();
+
+    if (pressedKey === expectedChar) {
+        spans[currentIndex].classList.add("c");
+        currentIndex++;
+    } else {
+        spans[currentIndex].classList.add("w");
+    }
+
+});
+loadNewWord();
