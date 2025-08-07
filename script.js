@@ -29,6 +29,7 @@ document.addEventListener('keydown', (event) => {
     const expectedChar = spans[currentIndex].textContent.toLowerCase();
 
     if (pressedKey === expectedChar) {
+        spans[currentIndex].classList.remove("w");
         spans[currentIndex].classList.add("c");
         currentIndex++;
     } else {
